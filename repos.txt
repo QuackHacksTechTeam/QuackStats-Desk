@@ -1,2 +1,0 @@
-https://github.com/Josiah-Kitchin/Ray-Tracer
-https://github.com/Josiah-Kitchin/HTTP-Server
