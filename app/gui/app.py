@@ -8,6 +8,16 @@ import threading
 from PIL import Image, ImageTk
 from tkinter import font
 
+import sys
+import os
+
+def resource_path(relative_path):
+    """ Get the absolute path to the resource, works for both development and PyInstaller. """
+    base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
+    return os.path.join(base_path, relative_path)
+
+quackhacks_path = resource_path("assets/quackhacks.png")
+refresh_path = resource_path("assets/refresh2.png")
 
 
 class App(ttk.Window):
@@ -77,7 +87,7 @@ class HomePage(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.controller = controller
 
-        img = Image.open("./images/quackhacks.png")
+        img = Image.open(quackhacks_path)
         img = img.resize((600, 400), Image.Resampling.LANCZOS)  # Adjust size as needed
         self.image = ImageTk.PhotoImage(img)
 
@@ -177,7 +187,7 @@ class StatsFrame(ttk.Frame):
         # Refersh image 
         self.angle = 0  
         self.is_spinning = False
-        self.original_img = Image.open("./images/refresh2.png")
+        self.original_img = Image.open(refresh_path)
         self.icon_size = (20, 20)
         self.original_img = self.original_img.resize(self.icon_size, Image.Resampling.LANCZOS)
         self.tk_img = ImageTk.PhotoImage(self.original_img)

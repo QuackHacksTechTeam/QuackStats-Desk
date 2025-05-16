@@ -6,8 +6,13 @@ import os
 import shutil
 from logger_config import Log
 from stats.is_excluded_file import is_excluded_file
-from stats.config import REPOS_PATH
 
+def get_repo_path():
+    base_dir = os.path.expanduser("~/.quackstats")
+    os.makedirs(base_dir, exist_ok=True)
+    return base_dir
+
+REPOS_PATH = get_repo_path()
 
 def get_all_repo_stats(repo_links: list[str]) -> list[RepoStat]: 
 
@@ -85,7 +90,7 @@ def clone_repo(repo_link, destination_path: str):
 
 # --------------- Private Functions ---------------
 
-def is_in_repodir(path: str, repo_dir="./repos") -> bool:
+def is_in_repodir(path: str, repo_dir=REPOS_PATH) -> bool:
     """
     Makes sure we dont do anything stupid...
     """
